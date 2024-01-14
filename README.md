@@ -28,6 +28,8 @@ export const Billing_TYPE_DICT = {
 
 ## 开发流
 
+- 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
+
 - mock data: 以 API 为主线创建 mock 数据 mock/product.ts 》创建 services/product/typings.d.ts 》创建 constants/product.ts 枚举及常量部分 》创建 services/product/index.ts mock/organization.ts 示例：
 
 ```
@@ -240,4 +242,53 @@ export async function getBillingMethods() {
   });
 }
 
+```
+
+- share api data: 服务端数据要作为全局共享数据，使用时共享数据中有就直接使用没有就请求。创建全局共享数据要创建model，这是一个自定义hook，顶层组件渲染时调用该hook，返回的数据存储到全局中:
+
+```
+import { getStateList } from '@/services/state';
+import {} from '@umijs/max';
+import { useCallback, useState } from 'react';
+
+export default function () {
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState<Record<string, API_STATE.State>>({});
+
+  const fetchState = useCallback((flowCode: string) => {
+    setLoading(true);
+    getStateList(flowCode)
+      .then((r) => {
+        setList((pre) => ({ ...pre, [flowCode]: r }));
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { list, loading, fetchState };
+}
+
+```
+
+通过 useModel 使用全局数据，useModel(namespace) 方法返回指定命名空间的共享数据，共享数据中没有就要请求数据。使用服务端共享数据的逻辑都一样，可以抽象为一个hook。示例：
+
+```
+import { useModel } from '@umijs/max';
+import { useEffect } from 'react';
+
+export default function useStatus(flowCode: string) {
+  const { list, fetchState } = useModel('state');
+  useEffect(() => {
+    if (!list[flowCode]) {
+      fetchState(flowCode);
+    }
+  }, [fetchState, flowCode, list]);
+  return list[flowCode] || [];
+}
+
+```
+
+使用 hook:
+
+```
+const orderStatuses = useStatus('order');
 ```
