@@ -22,6 +22,8 @@ export const Billing_TYPE_DICT = {
 
 ```
 
+## 最佳实践
+
 ## 操作
 
 - 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
@@ -291,4 +293,46 @@ export default function useStatus(flowCode: string) {
 
 ```
 const orderStatuses = useStatus('order');
+```
+
+- 创建页面
+
+- 路由配置：子菜单配置在routes中，否则配置在外层
+
+```
+[
+    {
+    path: '/org',
+    name: '企业管理',
+    icon: 'smile',
+    component: './organization/OrganizationList',
+  },
+  {
+    name: '新建企业',
+    path: '/org/create',
+    component: './organization/OrganizationEdit',
+    hideInMenu: true,
+  },
+  {
+    name: '编辑企业',
+    path: '/org/edit',
+    component: './organization/OrganizationEdit',
+    hideInMenu: true,
+  }
+  {
+    path: '/user',
+    name: '人员管理',
+    icon: 'TeamOutlined',
+    access: 'isAdmin',
+    routes: [
+      { path: '/user', redirect: '/user/user-list' },
+      {
+        path: '/user/user-list',
+        name: '用户管理',
+        component: './user/UserList',
+      },
+      { path: '/user/group-list', name: '用户组管理', component: './user/UserGroupList' },
+    ],
+  }
+]
 ```
