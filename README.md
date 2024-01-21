@@ -24,6 +24,37 @@ export const Billing_TYPE_DICT = {
 
 ## 最佳实践
 
+- 表单项的值相互依赖：
+
+```
+import { Form, Input } from 'antd';
+import { useEffect } from 'react';
+const { Item, useForm, useWatch } = Form;
+const Welcome = () => {
+  const [form] = useForm();
+  const productName = useWatch('productName', form);
+  useEffect(() => {
+    form.setFieldValue('billingMethods', productName);
+  }, [form, productName]);
+  return (
+    <div>
+      <Form initialValues={{ productName: 'name1' }} form={form}>
+        <Item label="产品名称" name={'productName'}>
+          <Input />
+        </Item>
+
+        <Item label="产品项" name="billingMethods">
+          <Input />
+        </Item>
+      </Form>
+    </div>
+  );
+};
+
+export default Welcome;
+
+```
+
 ## 操作
 
 - 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
@@ -295,7 +326,9 @@ export default function useStatus(flowCode: string) {
 const orderStatuses = useStatus('order');
 ```
 
-- 创建页面
+- 创建静态页面
+
+- 添加反向数据流
 
 - 路由配置：子菜单配置在routes中，否则配置在外层
 
