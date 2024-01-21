@@ -1,7 +1,7 @@
 import { Form, Input } from 'antd';
 import { useEffect } from 'react';
 const { Item, useForm, useWatch } = Form;
-const DependencyFormItemValue = () => {
+const DependencyValue = () => {
   const [form] = useForm();
   const productName = useWatch('productName', form);
   useEffect(() => {
@@ -22,4 +22,4 @@ const DependencyFormItemValue = () => {
   );
 };
 
-export default DependencyFormItemValue;
+export default DependencyValue;
