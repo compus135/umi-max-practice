@@ -32,7 +32,7 @@ export default defineConfig({
     {
       name: ' Form 示例',
       path: '/form',
-      component: './antd/form/DependencyRender',
+      component: './antd/form/Z',
     },
   ],
   npmClient: 'pnpm',

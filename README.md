@@ -57,6 +57,119 @@ export default Welcome;
 
 - 表单项渲染依赖：
 
+```
+import { DISCOUNT_METHOD_DICT, DiscountMethod } from '@/constants/product';
+import { Form, InputNumber, Radio } from 'antd';
+import { useEffect } from 'react';
+const { Item, useForm, useWatch } = Form;
+const DependencyRender = () => {
+  const [form] = useForm();
+  const productName = useWatch('productName', form);
+  useEffect(() => {
+    form.setFieldValue('billingMethods', productName);
+  }, [form, productName]);
+  return (
+    <div>
+      <Form
+        initialValues={{
+          orderItem: { discountMethod: DiscountMethod.Rate, discountRate: 50 },
+        }}
+        form={form}
+      >
+        <Item label="优惠方式" name={['orderItem', 'discountMethod']}>
+          <Radio.Group>
+            {Object.entries(DISCOUNT_METHOD_DICT).map(([key, value]) => (
+              <Radio key={key} value={parseInt(key)}>
+                {value.label}
+              </Radio>
+            ))}
+          </Radio.Group>
+        </Item>
+        <Item dependencies={[['orderItem', 'discountMethod']]} noStyle>
+          {() => {
+            const discountMethod = form.getFieldValue([
+              'orderItem',
+              'discountMethod',
+            ]);
+
+            return (
+              <>
+                {discountMethod === DiscountMethod.Rate && (
+                  <Item
+                    name={['orderItem', 'discountRate']}
+                    label="优惠折扣率"
+                    rules={[{ required: true }]}
+                  >
+                    <InputNumber style={{ width: '100%' }} />
+                  </Item>
+                )}
+                {discountMethod === DiscountMethod.Amount && (
+                  <Item
+                    name={['orderItem', 'discountPrice']}
+                    label="优惠金额"
+                    rules={[{ required: true }]}
+                  >
+                    <InputNumber style={{ width: '100%' }} />
+                  </Item>
+                )}
+              </>
+            );
+          }}
+        </Item>
+      </Form>
+    </div>
+  );
+};
+
+export default DependencyRender;
+
+
+```
+
+- useWatch 监听字段变化，form.setFieldValue(key,value)、手动输入引起的改变useWatch 都可以监听到。
+
+```
+import { Button, Form, Input } from 'antd';
+import { useEffect } from 'react';
+const { Item, useForm, useWatch } = Form;
+const UseWatchAndSetFieldValue = () => {
+  const [form] = useForm();
+  const productName = useWatch('productName', form);
+  useEffect(() => {
+    form.setFieldValue('billingMethods', productName);
+  }, [form, productName]);
+  return (
+    <div>
+      <Form initialValues={{ productName: 'name1' }} form={form}>
+        <Item label="产品名称" name={'productName'}>
+          <Input />
+        </Item>
+
+        <Item label="产品项" name="billingMethods">
+          <Input />
+        </Item>
+      </Form>
+      <Button
+        onClick={() => {
+          form.setFieldValue('productName', 'xx');
+        }}
+      >
+        change productName
+      </Button>
+    </div>
+  );
+};
+
+export default UseWatchAndSetFieldValue;
+
+```
+
+- dependencies 更新，通过form.setFieldValue 改变值无法触发依赖更新。
+
+```
+
+```
+
 ## 操作
 
 - 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
