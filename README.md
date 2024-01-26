@@ -24,6 +24,8 @@ export const Billing_TYPE_DICT = {
 
 ## 最佳实践
 
+### 表单
+
 - 表单项的值相互依赖：
 
 ```
@@ -168,6 +170,13 @@ export default UseWatchAndSetFieldValue;
 
 ```
 
+```
+
+- 表单初始值，当表单加载后更新初始值可通过key来实现
+
+```
+<Form form={form} onFinish={onFinish} key={profiles ? 'hasProfiles' : 'noProfiles'}>
+</Form>
 ```
 
 ## 操作
