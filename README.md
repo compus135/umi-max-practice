@@ -24,6 +24,37 @@ export const Billing_TYPE_DICT = {
 
 ## 最佳实践
 
+### 构建和部署
+
+- 部署到非根目录下
+
+```
+1. 首先要更新页面路由如 localhost:80/ 转为 localhost:80/b, 其次生成的静态资源要更改绝对路径。.umirc.ts 配置 base, publicPath, 如：
+{
+  base: '/b/',
+  publicPath: '/b/',
+}
+
+2. 如果静态资源是项目外的，放在public目录下，则需手动修改使用这些资源的地方。如：
+<Image src="/logo.png" /> 转为 <Image src="/b/logo.png" />
+使用项目内的静态资源，放在 src/assets目录下，无需改动。如：
+import imageUrl from '@/assets/image.png'
+<Image src={imageUrl} />
+
+3. nginx 配置，根据 base 将dist重命名并放在根目录下。配置如：
+  location /a {
+      root html;
+      try_files $uri $uri/ /a/index.html$args
+      index index.html;
+  }
+   location /b {
+      root html;
+      try_files $uri $uri/ /b/index.html$args
+      index index.html;
+  }
+
+```
+
 ### 样式
 
 - Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。

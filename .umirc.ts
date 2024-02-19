@@ -29,11 +29,6 @@ export default defineConfig({
       path: '/table',
       component: './Table',
     },
-    {
-      name: ' Form 示例',
-      path: '/form',
-      component: './antd/form/Z',
-    },
   ],
   npmClient: 'pnpm',
 });
