@@ -24,6 +24,35 @@ export const Billing_TYPE_DICT = {
 
 ## 最佳实践
 
+### 国际化
+
+```
+1. 在 `src/locales` 目录下创建多语言文件 `zh-CN.ts` 和 `en-US.ts`
+
+2. 语言内容：
+export default {
+  msg: '您好！',
+};
+
+3. 在组件中使用：
+
+import { useIntl } from '@umijs/max';
+
+const Locale = () => {
+  const intl = useIntl();
+  const msg = intl.formatMessage({ id: 'msg' });
+  return <div>{msg}</div>;
+};
+
+4. 在`.umirc.ts`中配置国际化插件：
+
+locale:{}
+
+5. 切换语言：`<SelectLang reload={false} />`
+
+6. API中文
+```
+
 ### 构建和部署
 
 - 部署到非根目录下

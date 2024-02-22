@@ -9,6 +9,7 @@ export default defineConfig({
   layout: {
     title: '@umijs/max',
   },
+  locale: {},
   routes: [
     {
       path: '/',
@@ -28,6 +29,11 @@ export default defineConfig({
       name: ' CRUD 示例',
       path: '/table',
       component: './Table',
+    },
+    {
+      name: '国际化 示例',
+      path: '/intl',
+      component: './Locale',
     },
   ],
   npmClient: 'pnpm',
