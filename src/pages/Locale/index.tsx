@@ -4,7 +4,10 @@ const Locale = () => {
   const intl = useIntl();
   return (
     <div>
-      <div>中文{intl.formatMessage({ id: 'msg', defaultMessage: '' })}</div>
+      <div>
+        {intl.formatMessage({ id: 'msg', defaultMessage: '' })}
+        {intl.formatMessage({ id: 'info', defaultMessage: '' })}
+      </div>
       <SelectLang reload={false} />
     </div>
   );
