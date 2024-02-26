@@ -44,43 +44,43 @@ const Locale = () => {
   return <div>{msg}</div>;
 };
 
-4. 在`.umirc.ts`中配置国际化插件：
+4. 动态添加多语言：
+ addLocale(
+   'zh-CN',
+   {
+     welcome: '欢迎！',
+   },
+   {
+     momentLocale: 'zh-CN',
+     antd: zh_CN,
+   },
+ );
+
+5. 文本常量：
+
+export const Billing_TYPE_DICT = {
+  PrePay: { labelLocaleId: 'prepay' },
+};
+// 组件中使用
+{intl.formatMessage({ id: Billing_TYPE_DICT.PrePay.labelLocaleId })}
+
+6. 在`.umirc.ts`中配置国际化插件：
 
 locale:{}
 
-5. 切换语言：`<SelectLang reload={false} />`
-
-6. API中文
-```
+7. 切换语言：`<SelectLang reload={false} />`
 
 ### 构建和部署
 
 - 部署到非根目录下
 
 ```
-1. 首先要更新页面路由如 localhost:80/ 转为 localhost:80/b, 其次生成的静态资源要更改绝对路径。.umirc.ts 配置 base, publicPath, 如：
-{
-  base: '/b/',
-  publicPath: '/b/',
-}
 
-2. 如果静态资源是项目外的，放在public目录下，则需手动修改使用这些资源的地方。如：
-<Image src="/logo.png" /> 转为 <Image src="/b/logo.png" />
-使用项目内的静态资源，放在 src/assets目录下，无需改动。如：
-import imageUrl from '@/assets/image.png'
-<Image src={imageUrl} />
+1. 首先要更新页面路由如 localhost:80/ 转为 localhost:80/b, 其次生成的静态资源要更改绝对路径。.umirc.ts 配置 base, publicPath, 如：{ base: '/b/', publicPath: '/b/', }
 
-3. nginx 配置，根据 base 将dist重命名并放在根目录下。配置如：
-  location /a {
-      root html;
-      try_files $uri $uri/ /a/index.html$args
-      index index.html;
-  }
-   location /b {
-      root html;
-      try_files $uri $uri/ /b/index.html$args
-      index index.html;
-  }
+2. 如果静态资源是项目外的，放在public目录下，则需手动修改使用这些资源的地方。如： <Image src="/logo.png" /> 转为 <Image src="/b/logo.png" /> 使用项目内的静态资源，放在 src/assets目录下，无需改动。如：import imageUrl from '@/assets/image.png' <Image src={imageUrl} />
+
+3. nginx 配置，根据 base 将dist重命名并放在根目录下。配置如：location /a { root html; try_files $uri $uri/ /a/index.html$args index index.html; } location /b { root html; try_files $uri $uri/ /b/index.html$args index index.html; }
 
 ```
 
@@ -89,23 +89,9 @@ import imageUrl from '@/assets/image.png'
 - Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。
 
 ```
-// table 祖先元素
-.ant-table {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  &-thead > tr,
-  &-tbody > tr {
-    > th,
-    > td {
-      white-space: pre;
-    }
-  }
-}
-// table
-.ant-table-wrapper table {
-  width:100%
-}
+
+// table 祖先元素 .ant-table { width: 100%; overflow-x: auto; overflow-y: hidden; &-thead > tr, &-tbody > tr { > th, > td { white-space: pre; } } } // table .ant-table-wrapper table { width:100% }
+
 ```
 
 table {width:100%} 仍不足以容纳table内容，table的实际width大于父容器的width，从而出现滚动条。
@@ -115,29 +101,16 @@ table {width:100%} 仍不足以容纳table内容，table的实际width大于父�
 - 表单项的值相互依赖：
 
 ```
-import { Form, Input } from 'antd';
-import { useEffect } from 'react';
-const { Item, useForm, useWatch } = Form;
-const Welcome = () => {
-  const [form] = useForm();
-  const productName = useWatch('productName', form);
-  useEffect(() => {
-    form.setFieldValue('billingMethods', productName);
-  }, [form, productName]);
-  return (
-    <div>
-      <Form initialValues={{ productName: 'name1' }} form={form}>
-        <Item label="产品名称" name={'productName'}>
-          <Input />
-        </Item>
+
+import { Form, Input } from 'antd'; import { useEffect } from 'react'; const { Item, useForm, useWatch } = Form; const Welcome = () => { const [form] = useForm(); const productName = useWatch('productName', form); useEffect(() => { form.setFieldValue('billingMethods', productName); }, [form, productName]); return ( <div> <Form initialValues={{ productName: 'name1' }} form={form}> <Item label="产品名称" name={'productName'}> <Input /> </Item>
 
         <Item label="产品项" name="billingMethods">
           <Input />
         </Item>
       </Form>
     </div>
-  );
-};
+
+); };
 
 export default Welcome;
 
@@ -146,39 +119,10 @@ export default Welcome;
 - 表单项渲染依赖：
 
 ```
-import { DISCOUNT_METHOD_DICT, DiscountMethod } from '@/constants/product';
-import { Form, InputNumber, Radio } from 'antd';
-import { useEffect } from 'react';
-const { Item, useForm, useWatch } = Form;
-const DependencyRender = () => {
-  const [form] = useForm();
-  const productName = useWatch('productName', form);
-  useEffect(() => {
-    form.setFieldValue('billingMethods', productName);
-  }, [form, productName]);
-  return (
-    <div>
-      <Form
-        initialValues={{
+
+import { DISCOUNT_METHOD_DICT, DiscountMethod } from '@/constants/product'; import { Form, InputNumber, Radio } from 'antd'; import { useEffect } from 'react'; const { Item, useForm, useWatch } = Form; const DependencyRender = () => { const [form] = useForm(); const productName = useWatch('productName', form); useEffect(() => { form.setFieldValue('billingMethods', productName); }, [form, productName]); return ( <div> <Form initialValues={{
           orderItem: { discountMethod: DiscountMethod.Rate, discountRate: 50 },
-        }}
-        form={form}
-      >
-        <Item label="优惠方式" name={['orderItem', 'discountMethod']}>
-          <Radio.Group>
-            {Object.entries(DISCOUNT_METHOD_DICT).map(([key, value]) => (
-              <Radio key={key} value={parseInt(key)}>
-                {value.label}
-              </Radio>
-            ))}
-          </Radio.Group>
-        </Item>
-        <Item dependencies={[['orderItem', 'discountMethod']]} noStyle>
-          {() => {
-            const discountMethod = form.getFieldValue([
-              'orderItem',
-              'discountMethod',
-            ]);
+        }} form={form} > <Item label="优惠方式" name={['orderItem', 'discountMethod']}> <Radio.Group> {Object.entries(DISCOUNT_METHOD_DICT).map(([key, value]) => ( <Radio key={key} value={parseInt(key)}> {value.label} </Radio> ))} </Radio.Group> </Item> <Item dependencies={[['orderItem', 'discountMethod']]} noStyle> {() => { const discountMethod = form.getFieldValue([ 'orderItem', 'discountMethod', ]);
 
             return (
               <>
@@ -206,32 +150,18 @@ const DependencyRender = () => {
         </Item>
       </Form>
     </div>
-  );
-};
+
+); };
 
 export default DependencyRender;
-
 
 ```
 
 - useWatch 监听字段变化，form.setFieldValue(key,value)、手动输入引起的改变useWatch 都可以监听到。
 
 ```
-import { Button, Form, Input } from 'antd';
-import { useEffect } from 'react';
-const { Item, useForm, useWatch } = Form;
-const UseWatchAndSetFieldValue = () => {
-  const [form] = useForm();
-  const productName = useWatch('productName', form);
-  useEffect(() => {
-    form.setFieldValue('billingMethods', productName);
-  }, [form, productName]);
-  return (
-    <div>
-      <Form initialValues={{ productName: 'name1' }} form={form}>
-        <Item label="产品名称" name={'productName'}>
-          <Input />
-        </Item>
+
+import { Button, Form, Input } from 'antd'; import { useEffect } from 'react'; const { Item, useForm, useWatch } = Form; const UseWatchAndSetFieldValue = () => { const [form] = useForm(); const productName = useWatch('productName', form); useEffect(() => { form.setFieldValue('billingMethods', productName); }, [form, productName]); return ( <div> <Form initialValues={{ productName: 'name1' }} form={form}> <Item label="产品名称" name={'productName'}> <Input /> </Item>
 
         <Item label="产品项" name="billingMethods">
           <Input />
@@ -245,8 +175,8 @@ const UseWatchAndSetFieldValue = () => {
         change productName
       </Button>
     </div>
-  );
-};
+
+); };
 
 export default UseWatchAndSetFieldValue;
 
@@ -261,6 +191,7 @@ export default UseWatchAndSetFieldValue;
 - 表单初始值，当表单加载后更新初始值可通过key来实现
 
 ```
+
 <Form form={form} onFinish={onFinish} key={profiles ? 'hasProfiles' : 'noProfiles'}>
 </Form>
 ```
