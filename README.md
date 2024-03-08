@@ -69,6 +69,7 @@ export const Billing_TYPE_DICT = {
 locale:{}
 
 7. 切换语言：`<SelectLang reload={false} />`
+```
 
 ### 构建和部署
 

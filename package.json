@@ -2,11 +2,11 @@
   "private": true,
   "author": "yangsw <yangsw@zetyun.com>",
   "scripts": {
-    "dev": "max dev",
     "build": "max build",
+    "dev": "max dev",
     "format": "prettier --cache --write .",
-    "prepare": "husky install",
     "postinstall": "max setup",
+    "prepare": "husky install",
     "setup": "max setup",
     "start": "npm run dev"
   },
@@ -14,7 +14,8 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-components": "^2.6.43",
     "@umijs/max": "^4.1.0",
-    "antd": "^5.12.7"
+    "antd": "^5.12.7",
+    "jotai": "^2.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.46",

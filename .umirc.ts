@@ -16,6 +16,37 @@ export default defineConfig({
       redirect: '/home',
     },
     {
+      name: '国际化 示例',
+      path: '/intl',
+      component: './Locale',
+    },
+    {
+      name: 'jotai Demo1',
+      path: '/jotai/demo1',
+      component: './jotai/Demo1',
+    },
+    {
+      name: 'jotai Demo2',
+      path: '/jotai/demo2',
+      component: './jotai/Demo2',
+    },
+    {
+      name: 'Form',
+      path: '/form',
+      routes: [
+        {
+          name: 'DependencyRender',
+          path: '/form/dependencyRender',
+          component: './form/DependencyRender',
+        },
+        {
+          name: 'FormList',
+          path: '/form/formList',
+          component: './form/FormList',
+        },
+      ],
+    },
+    {
       name: '首页',
       path: '/home',
       component: './Home',
@@ -29,11 +60,6 @@ export default defineConfig({
       name: ' CRUD 示例',
       path: '/table',
       component: './Table',
-    },
-    {
-      name: '国际化 示例',
-      path: '/intl',
-      component: './Locale',
     },
   ],
   npmClient: 'pnpm',
