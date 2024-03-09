@@ -47,6 +47,23 @@ export default defineConfig({
       ],
     },
     {
+      name: 'antd',
+      path: '/antd',
+      routes: [
+        {
+          name: 'table',
+          path: '/antd/table',
+          routes: [
+            {
+              name: 'TableStyle',
+              path: '/antd/table/',
+              component: './antd/table/TableStyle',
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: '首页',
       path: '/home',
       component: './Home',
