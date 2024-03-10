@@ -16,6 +16,28 @@ export default defineConfig({
       redirect: '/home',
     },
     {
+      name: 'procomponents',
+      path: '/procomponents',
+      routes: [
+        {
+          name: 'protable',
+          path: '/procomponents/protable',
+          routes: [
+            {
+              name: 'Basic Use',
+              path: '/procomponents/protable/basic',
+              component: './procomponents/protable/Demo01BasicUse',
+            },
+            {
+              name: 'Request',
+              path: '/procomponents/protable/request',
+              component: './procomponents/protable/Demo03Request',
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: '国际化 示例',
       path: '/intl',
       component: './Locale',

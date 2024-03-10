@@ -24,6 +24,11 @@ export const Billing_TYPE_DICT = {
 
 ## 最佳实践
 
+### 项目的稳定性
+
+- package.json 使用精确版本号的包
+- 使用lock文件，以保证间接依赖包被精确锁定
+
 ### 国际化
 
 ```
