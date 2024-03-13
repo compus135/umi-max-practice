@@ -29,6 +29,49 @@ export const Billing_TYPE_DICT = {
 - package.json 使用精确版本号的包
 - 使用lock文件，以保证间接依赖包被精确锁定
 
+### 基于路由信息生成菜单
+
+假设角色A和角色B看到的菜单结构不同。
+
+方案一：
+
+- 使角色A和角色B所有路由都不相同
+- 通过 access 区分
+
+```
+  {
+    path: '/a',
+    name: 'A',
+    component: './A',
+    access: 'roleA',
+  },
+  {
+    path: '/b',
+    name: 'B',
+    component: './B',
+    access: 'roleB',
+  },
+```
+
+方案二：
+
+- 角色A和角色B的路由分别存放在a,b 中，公共部分放在common中，菜单的顺序通过 order 定义
+- 通过 `{layout:{menu:request}}` 生成菜单。
+
+```
+  layout{
+    menu: {
+      request() {
+        if (roleA) {
+          return [...(role === roleA ? a: b), ...common].sort((a, b) => {
+            return (a.order || Infinity) - (b.order || Infinity);
+          });
+        }
+      },
+    },
+  }
+```
+
 ### 国际化
 
 ```
