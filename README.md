@@ -261,11 +261,7 @@ export default UseWatchAndSetFieldValue;
 
 ```
 
-- dependencies 更新，通过form.setFieldValue 改变值无法触发依赖更新。
-
-```
-
-```
+- dependencies 更新，通过form.setFieldValue 改变值无法触发依赖更新。表单值的变化都会调用`shouldUpdate()`, 比较原先的值和当前的值比较决定是否需要渲染。参考 `form/dependencyRender2`
 
 - 表单初始值，当表单加载后更新初始值可通过key来实现
 
