@@ -165,15 +165,11 @@ locale:{}
 
 ### 样式
 
-- Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。
+- Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。`scroll:{x:'max-content'}`
 
-```
+### request
 
-// table 祖先元素 .ant-table { width: 100%; overflow-x: auto; overflow-y: hidden; &-thead > tr, &-tbody > tr { > th, > td { white-space: pre; } } } // table .ant-table-wrapper table { width:100% }
-
-```
-
-table {width:100%} 仍不足以容纳table内容，table的实际width大于父容器的width，从而出现滚动条。
+- 请求异常处理：`responseInterceptors` 响应拦截和处理 2xx 中业务错误，`errorHandler` 处理非 2xx 错误和`responseInterceptors`抛出的错误。参考`requestErrorConfig`
 
 ### 表单
 
