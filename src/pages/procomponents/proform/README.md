@@ -47,7 +47,9 @@ const MyForm = () => (
 
 基本使用`Demo01`
 
-标签与表单项布局：submmiter, layout
+标签与表单项布局`Demo02`：submmiter, layout
+
+栅格化布局`Demo03`： grid: true
 
 ## 实践
 
