@@ -1,5 +1,9 @@
 ## ProForm
 
+- proform 属性
+
+submitter: 定制操作按钮
+
 - 何时使用ProForm
 
 ProForm 与 antd 功能完全对齐，但是在其之上还增加一些预设行为和多种布局 。
@@ -43,7 +47,7 @@ const MyForm = () => (
 
 基本使用`Demo01`
 
-TODO 标签与表单项布局
+标签与表单项布局：submmiter, layout
 
 ## 实践
 
