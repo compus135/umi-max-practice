@@ -51,7 +51,9 @@ const MyForm = () => (
 
 栅格化布局`Demo03`： grid: true
 
-表格联动`Demo04`:
+表格联动`Demo04`: <ProformDependency name=[]/>
+
+表单方法调用`Demo05`: <Proform formRef />
 
 ## 实践
 
