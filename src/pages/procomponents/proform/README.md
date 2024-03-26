@@ -55,6 +55,8 @@ const MyForm = () => (
 
 表单方法调用`Demo05`: <Proform formRef />
 
+同步提交结果到URL`Demo06`: <Proform synToUrl={get,set} />
+
 ## 实践
 
 - autoFocusFirstInput
