@@ -269,6 +269,8 @@ export default UseWatchAndSetFieldValue;
 </Form>
 ```
 
+- <Form.Item>内有多个元素，可以使用内嵌的 Form.Item 完成。参考`form/Demo06`
+
 ## 操作
 
 - 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
@@ -582,4 +584,19 @@ const orderStatuses = useStatus('order');
     ],
   }
 ]
+```
+
+## QA
+
+1. 表单项嵌套？noStyle 的所有校验状态都会被提升至顶层 FormItem。
+
+```
+<Form.Item label="demo">
+  <div>
+    I am render props
+    <Form.Item name="demo" noStyle>
+      <Input placeholder="render props" />
+    </Form.Item>
+  </div>
+</Form.Item>
 ```

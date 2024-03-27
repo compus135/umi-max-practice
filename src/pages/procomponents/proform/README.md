@@ -63,6 +63,8 @@ const MyForm = () => (
 
 与EditProTable混用`Demo09`: <Proform.Item><EditProTable />
 
+TODO劫持渲染函数的组件`Demo10`: `useControlModel`
+
 ## 实践
 
 - autoFocusFirstInput
