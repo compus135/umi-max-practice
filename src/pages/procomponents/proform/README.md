@@ -59,6 +59,8 @@ const MyForm = () => (
 
 金额`Demo07`: <ProformMoney />
 
+固定页脚`Demo08`: <FooterToolBar />
+
 ## 实践
 
 - autoFocusFirstInput
