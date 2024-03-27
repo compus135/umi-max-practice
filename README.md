@@ -271,6 +271,8 @@ export default UseWatchAndSetFieldValue;
 
 - <Form.Item>内有多个元素，可以使用内嵌的 Form.Item 完成。参考`form/Demo06`
 
+- 可以自定义表单控件。`form/Demo07`
+
 ## 操作
 
 - 新建pnpm dlx create-umi@latest > select ant design pro > select pnpm
