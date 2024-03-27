@@ -61,6 +61,8 @@ const MyForm = () => (
 
 固定页脚`Demo08`: <FooterToolBar />
 
+与EditProTable混用`Demo09`: <Proform.Item><EditProTable />
+
 ## 实践
 
 - autoFocusFirstInput
