@@ -57,6 +57,8 @@ const MyForm = () => (
 
 同步提交结果到URL`Demo06`: <Proform synToUrl={get,set} />
 
+金额`Demo07`: <ProformMoney />
+
 ## 实践
 
 - autoFocusFirstInput
