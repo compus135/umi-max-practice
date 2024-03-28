@@ -65,6 +65,8 @@ const MyForm = () => (
 
 TODO劫持渲染函数的组件`Demo10`: `useControlModel`
 
+FormControlRender`Demo11`
+
 ## 实践
 
 - autoFocusFirstInput
