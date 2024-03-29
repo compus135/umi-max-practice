@@ -168,6 +168,7 @@ locale:{}
 - Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。`scroll:{x:'max-content'}`
 - 输入框响应式宽度，在较大的显示屏上保持固定的宽度，而在较小的屏幕或窄窗口上能够自适应父容器的宽度 `width, max-width`
 - form horizontal 小于575则变为上下，一般设为：`{         labelCol: { span: 4 },         wrapperCol: { span: 14 },       }`
+- card 中有 Tabs 的样式：使用语义化的 css 参见`global.less`
 
 ### request
 
