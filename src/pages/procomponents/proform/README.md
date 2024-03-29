@@ -69,6 +69,8 @@ FormControlRender`Demo11`
 
 FormItemRender`Dmeo12`
 
+FormRef`Demo13`
+
 ## 实践
 
 - autoFocusFirstInput
