@@ -173,6 +173,10 @@ locale:{}
 
 - 请求异常处理：`responseInterceptors` 响应拦截和处理 2xx 中业务错误，`errorHandler` 处理非 2xx 错误和`responseInterceptors`抛出的错误。参考`requestErrorConfig`
 
+### Table
+
+- rowkey: 使用数据本身的唯一标识，如没有使用lodash uniqueId()。
+
 ### 表单
 
 - 表单项的值相互依赖：
