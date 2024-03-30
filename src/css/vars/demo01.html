@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --primary-color: #00b96b;
+      }
+      .title {
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">主题色：var(--primary-color)</div>
+    <script>
+      const root = document.documentElement;
+      console.log(
+        '主题色：var(--primary-color)',
+        getComputedStyle(root).getPropertyValue('--primary-color').trim(),
+      );
+      document.documentElement.style.setProperty('--primary-color', 'red');
+    </script>
+  </body>
+</html>
