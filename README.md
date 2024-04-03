@@ -147,6 +147,8 @@ export const Billing_TYPE_DICT = {
 locale:{}
 
 7. 切换语言：`<SelectLang reload={false} />`
+
+8. 获取当前语言 `getLocal()`, `getLocal() === 'zh-CN' ? item.zh:item:en`
 ```
 
 ### 构建和部署
@@ -167,7 +169,13 @@ locale:{}
 
 - Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。`scroll:{x:'max-content'}`
 - 输入框响应式宽度，在较大的显示屏上保持固定的宽度，而在较小的屏幕或窄窗口上能够自适应父容器的宽度 `width, max-width`
-- form horizontal 小于575则变为上下，一般设为：`{         labelCol: { span: 4 },         wrapperCol: { span: 14 },       }`
+- form horizontal 小于575则变为上下，一般设为：
+
+```
+<Form labelCol={{ span: 8 }} wrapperCol={{ span: 12 }} style={{ width: 300, margin: '0 auto' }}
+  >
+```
+
 - card 中有 Tabs 的样式：使用语义化的 css 参见`global.less`
 
 ### request
@@ -179,6 +187,8 @@ locale:{}
 - rowkey: 使用数据本身的唯一标识，如没有使用lodash uniqueId()。
 
 ### 表单
+
+- 布局：设置Form宽度为输入控件的2倍，居中显示，当label和表单项长度比为`1：2`时，`label:9,wrapper:12`, 当比为`1:3`时，`label:8,wrapper:12` 参考：`antd/form/demo01`
 
 - 表单项的值相互依赖：
 
