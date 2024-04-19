@@ -1,7 +1,14 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
-  antd: {},
+  antd: {
+    // 等同于 configProvider.theme
+    theme: {
+      components: {
+        Button: { contentFontSize: 24 },
+      },
+    },
+  },
   access: {},
   model: {},
   initialState: {},

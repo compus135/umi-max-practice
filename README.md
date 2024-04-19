@@ -165,6 +165,10 @@ locale:{}
 
 ```
 
+### 主题
+
+- [antd](https://umijs.org/docs/max/antd#theme) 通过构件时配置可以修改antd全局样式, 等同于配置configProvider.theme
+
 ### 样式
 
 - Table: 内容不换行，宽度撑满父元素，当宽度超出父元素出现滚动条。`scroll:{x:'max-content'}`
